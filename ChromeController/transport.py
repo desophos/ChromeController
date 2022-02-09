@@ -460,7 +460,13 @@ class ChromeExecutionManager():
 		self.log.info("Closing websocket connecton %s (%s)", tab_key, len(self.soclist))
 		self.soclist.pop(tab_key, None)
 
-		self.tablist = self.fetch_tablist()
+		try:
+			self.tablist = self.fetch_tablist()
+		except cr_exceptions.ChromeConnectFailure:
+			try: 
+				self._check_process_dead()
+			except cr_exceptions.ChromeDiedError:
+				self.tablist = []
 		return self.tablist
 
 	def close_tab(self, tab_key):
