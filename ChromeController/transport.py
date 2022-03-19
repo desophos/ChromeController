@@ -165,7 +165,7 @@ class ChromeExecutionManager():
 										preexec_fn    = preexec_fn,
 									)
 
-		self.log.debug("Spawned process: %s, PID: %s", self.cr_proc, self.cr_proc.pid)
+		self.log.debug("Spawned process PID: %s", self.cr_proc.pid)
 		for x in range(100):
 			self._check_process_dead()
 			try:
